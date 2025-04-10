@@ -61,21 +61,21 @@ export default function SignUp() {
         <CustomInput
           label="Name"
           type="text"
-          placeholder="Your name"
+          placeholder="Name"
           {...register("name")}
           error={errors.name?.message}
         />
         <CustomInput
           label="Email"
           type="email"
-          placeholder="Your email"
+          placeholder="Email"
           {...register("email")}
           error={errors.email?.message}
         />
         <CustomInput
           label="Password"
           type="password"
-          placeholder="Your password"
+          placeholder="Password"
           {...register("password")}
           error={errors.password?.message}
         />
