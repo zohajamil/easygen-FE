@@ -1,54 +1,74 @@
-# React + TypeScript + Vite
+# Easygen Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend of the a web application, built with **React**, **TypeScript**, **Vite** and **Radix UI**. It handles user authentication and displays a protected dashboard.
 
-Currently, two official plugins are available:
+## 🔧 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React + TypeScript
+- Vite
+- shadcn/ui (Tailwind + Radix UI)
+- Axios (For API calls)
+- React Hook Form + Zod (for forms)
+- Cypress (for E2E testing)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Clone the repo
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone https://github.com/zohajamil/easygen-FE.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. Add .env
+Create a .env file at the root of project & add two vars in it as follows:
+```bash
+VITE_API_URL="http://localhost:3000/"
+VITE_FRONTEND_URL="http://localhost:5173/"
+```
+
+### 4. Run the app
+```bash
+npm run dev
+```
+Visit [http://localhost:5173](http://localhost:5173)
+
+## 🧪 Testing the app
+Cypress e2e tests are added for testing of the app. It tests the signup of user, login of the same user and then deletes the user from the database at the end for cleanup ensuring that the next time signup test is not failed. The following commands can be run for testing.
+
+### 1. Run tests in command line
+```bash
+npm run cy:test:e2e
+```
+
+### 2. Run tests on UI
+- Run this command
+  ```bash
+  npx cypress open
+  ```
+- Then select e2e testing & choose any browser of your choice to run tests on.
+- Choose auth.cy.ts to run signup & login tests.
+
+## 📁 Folder Structure
+src/
+├── components/
+    ├── common/
+    ├── ui/
+├── lib/
+    ├── interfaces/
+    ├── utils/
+    ├── hooks/
+        ├── axios/
+        ├── validation/
+├── pages/
+
+## ✅ Features
+- Signup / Signin with encrypted token session
+- Logout with dropdown menu
+- Session persisted with MongoDB
+- Protected App Page with Welcome message
