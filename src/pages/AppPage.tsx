@@ -15,12 +15,12 @@ export default function AppPage() {
     const check = async () => {
       const sessionId = localStorage.getItem("sessionId");
       if (!sessionId) {
-        return navigate("/");
+        return navigate("/signin");
       }
 
       const data = await sendRequest<IValidateSessionResponse>(`users/session/${sessionId}`, "GET");
       if (!data || !data.valid) {
-        navigate("/");
+        navigate("/signin");
       } else {
         setName(data.name);
         setValid(true);
@@ -34,7 +34,7 @@ export default function AppPage() {
     const data = await sendRequest<ILogoutResponse>(`users/session/${sessionId}`, "DELETE");
     console.log("deleted: ", data);
     localStorage.removeItem("sessionId");
-    navigate("/");
+    navigate("/signin");
   };
 
   return valid ? (

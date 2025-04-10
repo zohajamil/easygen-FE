@@ -39,7 +39,7 @@ export default function SignIn() {
     const data = await sendRequest("users/authenticate", "POST", signInPayload);
     if (data) {
       localStorage.setItem("sessionId", data.sessionId);
-      navigate("/app");
+      navigate("/");
     }
   };
 

@@ -42,7 +42,7 @@ export default function SignUp() {
     console.log(data);
     if (data) {
       localStorage.setItem("sessionId", data.sessionId);
-      navigate("/app");
+      navigate("/");
     }
   };
 
