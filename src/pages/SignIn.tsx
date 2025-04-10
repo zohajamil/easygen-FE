@@ -6,6 +6,7 @@ import { CustomInput } from "../components/ui/CustomInput";
 import useAxiosHandler from "../lib/hooks/axios/useAxiosHandler";
 import { CustomButton } from "../components/ui/CustomButton";
 import { SignInSchema } from "../lib/hooks/validation/useSignInForm";
+import { IAuthenticatedUserResponse } from "../lib/interfaces/authenticatedUserResponse";
 
 export default function SignIn() {
   type SigninFormInputs = z.infer<typeof SignInSchema>;
@@ -29,17 +30,15 @@ export default function SignIn() {
   } = useSignInForm();
 
   const navigate = useNavigate();
-  const { sendRequest } = useAxiosHandler<unknown>();
+  const { sendRequest } = useAxiosHandler<IAuthenticatedUserResponse>();
 
-  const submitSigninForm: SubmitHandler<SigninFormInputs> = async (
-    event: any
-  ) => {
+  const submitSigninForm: SubmitHandler<SigninFormInputs> = async () => {
     const signInPayload = {
       ...getValues(),
     };
-    const data = await sendRequest("signup", "POST", signInPayload);
-    console.log(data);
+    const data = await sendRequest("users/authenticate", "POST", signInPayload);
     if (data) {
+      localStorage.setItem("sessionId", data.sessionId);
       navigate("/app");
     }
   };

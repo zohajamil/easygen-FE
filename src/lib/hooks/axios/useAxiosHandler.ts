@@ -2,30 +2,34 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
-export default function useAxiosHandler<T>() {
+interface APIErrorResponse {
+  message: string;
+}
+
+export default function useAxiosHandler<T = unknown>() {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const sendRequest = async (
+  const sendRequest = async <R = T>(
     url: string,
     method: string,
-    body?: any
-  ): Promise<T | null> => {
+    body?: object
+  ): Promise<R | null> => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios({
+      const response = await axios<R>({
         method,
         url: `${import.meta.env.VITE_API_URL}${url}`,
         data: body,
       });
 
-      setData(response.data);
+      setData(response.data as unknown as T);
       return response.data;
     } catch (err) {
-      const axiosError = err as AxiosError;
-      console.log(err);
+      const axiosError = err as AxiosError<APIErrorResponse>;
+      console.error(err);
       const errorMessage =
         axiosError.response?.data?.message || "An error occurred";
       setError(errorMessage);
