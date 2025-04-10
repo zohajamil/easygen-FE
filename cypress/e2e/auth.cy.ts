@@ -16,4 +16,13 @@ describe("Auth flow", () => {
     cy.contains("Login").click();
     cy.contains("Welcome to the application.").should("exist");
   });
+
+  // Clean up test user to run tests next time successfully
+  after(() => {
+    cy.request("DELETE", `${Cypress.env("API_URL")}/users`, {
+      email: "testuser@example.com",
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+    });
+  });
 });
