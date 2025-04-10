@@ -7,6 +7,7 @@ import useAxiosHandler from "../lib/hooks/axios/useAxiosHandler";
 import { CustomButton } from "../components/ui/CustomButton";
 import { SignInSchema } from "../lib/hooks/validation/useSignInForm";
 import { IAuthenticatedUserResponse } from "../lib/interfaces/authenticatedUserResponse";
+import AppBranding from "../components/common/AppBranding";
 
 export default function SignIn() {
   type SigninFormInputs = z.infer<typeof SignInSchema>;
@@ -44,12 +45,13 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-teal-800 p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-teal-800 p-4 space-y-6">
+      <AppBranding />
       <form
         className="bg-teal-400 p-8 rounded-lg shadow-xl max-w-sm w-full space-y-6"
         onSubmit={handleSubmit(submitSigninForm)}
       >
-        <h2 className="text-3xl font-semibold text-gray-700 text-center mb-6">
+        <h2 className="text-2xl font-semibold text-gray-700 text-center mb-4">
           Sign In
         </h2>
 
@@ -71,7 +73,7 @@ export default function SignIn() {
         <CustomButton label="Login" type="submit" />
 
         <div className="text-center text-sm text-teal-700">
-          Dont have an account?{" "}
+          Don’t have an account?{" "}
           <a href="/signup" className="text-blue-600 hover:underline">
             Register
           </a>

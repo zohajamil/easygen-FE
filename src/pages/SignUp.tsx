@@ -7,6 +7,7 @@ import { CustomInput } from "../components/ui/CustomInput";
 import useAxiosHandler from "../lib/hooks/axios/useAxiosHandler";
 import { CustomButton } from "../components/ui/CustomButton";
 import { IAuthenticatedUserResponse } from "../lib/interfaces/authenticatedUserResponse";
+import AppBranding from "../components/common/AppBranding";
 
 export default function SignUp() {
   type SignupFormInputs = z.infer<typeof SignUpSchema>;
@@ -47,7 +48,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-teal-800 p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-teal-800 p-4 space-y-6">
+      <AppBranding />
       <form
         className="bg-teal-400 p-8 rounded-lg shadow-xl max-w-sm w-full space-y-6"
         onSubmit={handleSubmit(submitSignupForm)}
