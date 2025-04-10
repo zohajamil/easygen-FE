@@ -55,6 +55,7 @@ npm run cy:test:e2e
 - Choose auth.cy.ts to run signup & login tests.
 
 ## 📁 Folder Structure
+```
 src/
 ├── components/
     ├── common/
@@ -66,6 +67,7 @@ src/
         ├── axios/
         ├── validation/
 ├── pages/
+```
 
 ## ✅ Features
 - Signup / Signin with encrypted token session
